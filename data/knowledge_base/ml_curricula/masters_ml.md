@@ -71,17 +71,25 @@ This comprehensive Masters program in Machine Learning provides advanced theoret
 ## Semester 4 (15 Credits)
 
 ### Capstone
-- **ML801** - Masters Thesis/Project (9 credits)
-  - Independent research or industry project
+- **ML801** - Masters Thesis Part I (3 credits)
+  - Research proposal and literature review
   - Prerequisites: Completion of 45 credits
   
-- **ML802** - Research Methodology (3 credits)
+- **ML802** - Masters Thesis Part II (3 credits)
+  - Implementation and experimentation
+  - Prerequisites: ML801
+  
+- **ML803** - Masters Thesis Part III (3 credits)
+  - Analysis and dissertation writing
+  - Prerequisites: ML802
+  
+- **ML804** - Research Methodology (3 credits)
   - Research design, experimentation, paper writing
   - Prerequisites: None
 
 ### Elective
-- **ML803** - Ethics in AI (3 credits)
-- **ML804** - Advanced Topics in ML (3 credits)
+- **ML805** - Ethics in AI (3 credits)
+- **ML806** - Advanced Topics in ML (3 credits)
 
 ## Learning Outcomes
 - Design and implement advanced ML algorithms

@@ -210,14 +210,16 @@ def main():
                     focus_areas=focus_list
                 )
                 
-                # Store in session state
+                # Store in session state and trigger generation
                 st.session_state['request'] = request
                 st.session_state['use_rag'] = use_rag
+                st.session_state['generate_new'] = True  # Flag to trigger generation
     
     with col2:
         st.header("📊 Generated Curriculum")
         
-        if 'request' in st.session_state:
+        # Only generate if explicitly requested
+        if st.session_state.get('generate_new', False):
             request = st.session_state['request']
             use_rag = st.session_state.get('use_rag', True)
             
@@ -231,10 +233,14 @@ def main():
                     validation_report = validator.validate_and_report(curriculum)
                     st.session_state['validation'] = validation_report
                     
+                    # Clear the generation flag
+                    st.session_state['generate_new'] = False
+                    
                     st.success("✅ Curriculum generated successfully!")
                 
                 except Exception as e:
                     st.error(f"❌ Generation failed: {str(e)}")
+                    st.session_state['generate_new'] = False
                     st.stop()
         
         if 'curriculum' in st.session_state:
@@ -289,22 +295,19 @@ def main():
             
             # Download PDF button
             st.markdown("---")
-            if st.button("📥 Download PDF"):
-                with st.spinner("Generating PDF..."):
-                    try:
-                        pdf_buffer = pdf_generator.generate(curriculum)
-                        
-                        st.download_button(
-                            label="💾 Download Curriculum PDF",
-                            data=pdf_buffer,
-                            file_name=f"{curriculum.title.replace(' ', '_')}.pdf",
-                            mime="application/pdf"
-                        )
-                        
-                        st.success("✅ PDF ready for download!")
-                    
-                    except Exception as e:
-                        st.error(f"❌ PDF generation failed: {str(e)}")
+            try:
+                pdf_buffer = pdf_generator.generate(curriculum)
+                
+                st.download_button(
+                    label="📥 Download Curriculum PDF",
+                    data=pdf_buffer,
+                    file_name=f"{curriculum.title.replace(' ', '_')}.pdf",
+                    mime="application/pdf",
+                    use_container_width=True
+                )
+            
+            except Exception as e:
+                st.error(f"❌ PDF generation failed: {str(e)}")
         else:
             st.info("👈 Fill in the parameters and click 'Generate Curriculum' to get started!")
 

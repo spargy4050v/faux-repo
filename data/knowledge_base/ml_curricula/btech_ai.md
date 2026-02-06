@@ -62,13 +62,16 @@ A comprehensive undergraduate program combining computer science fundamentals wi
 - **AI702** - MLOps (3 credits) - Core - Prerequisites: AI501
 - **AI703** - Elective III (3 credits) - Elective
 - **AI704** - Elective IV (3 credits) - Elective
-- **AI705** - Industry Internship (8 credits) - Lab
+- **AI705** - Industry Internship I (4 credits) - Lab
+- **AI706** - Industry Internship II (4 credits) - Lab
 
 ## Semester 8 (20 Credits)
-- **AI801** - Capstone Project (12 credits) - Lab - Prerequisites: 140 credits completed
-- **AI802** - Seminar (2 credits) - Core
-- **AI803** - Elective V (3 credits) - Elective
-- **AI804** - Emerging Trends in AI (3 credits) - Core
+- **AI801** - Capstone Project I (4 credits) - Lab - Prerequisites: 140 credits completed
+- **AI802** - Capstone Project II (4 credits) - Lab - Prerequisites: 140 credits completed
+- **AI803** - Capstone Presentation (3 credits) - Lab - Prerequisites: 140 credits completed
+- **AI804** - Seminar (2 credits) - Core
+- **AI805** - Elective V (3 credits) - Elective
+- **AI806** - Emerging Trends in AI (4 credits) - Core
 
 ## Elective Options
 - Generative AI

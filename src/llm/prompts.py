@@ -58,6 +58,8 @@ Create a comprehensive {level} curriculum for {skill} spanning {duration_semeste
     
     # Output format instructions
     prompt_parts.append("""
+IMPORTANT: You must return ONLY a valid JSON object. No markdown, no explanations, just pure JSON.
+
 Provide the curriculum in the following JSON format:
 
 {
@@ -86,17 +88,31 @@ Provide the curriculum in the following JSON format:
   ]
 }
 
-Guidelines:
-1. Each course must have between 1-6 credits (typically 3-4 for theory, 1-2 for labs)
-2. Each semester should have 15-20 total credits
-3. Include a mix of Core, Elective, and Lab courses
-4. Ensure proper prerequisite chains
-5. Progress from foundational to advanced topics
-6. Include practical/project courses
-7. Make course codes realistic (e.g., CS101, ML201)
-8. Provide detailed course descriptions
+JSON FORMATTING RULES:
+⚠️ Use double quotes for all strings, not single quotes
+⚠️ Escape any quotes within strings with backslash: \"
+⚠️ No trailing commas after last items in arrays or objects
+⚠️ All strings must be properly closed
+⚠️ Course descriptions should be single sentences without line breaks
 
-Return ONLY the JSON object, no additional text.
+CRITICAL REQUIREMENT - COURSE CREDITS:
+⚠️ EVERY course "credits" field MUST be a number between 1 and 6 (inclusive).
+- Theory courses: Use 3 or 4 credits
+- Lab courses: Use 1 or 2 credits  
+- Project courses: Use 2 or 3 credits
+- NEVER use 7, 8, 9, 10, or higher credits for any single course
+- To reach semester credit totals, use multiple courses instead of high-credit single courses
+
+Guidelines:
+1. Each semester should have 15-20 total credits (achieved by having 4-6 courses per semester)
+2. Include a mix of Core, Elective, and Lab courses
+3. Ensure proper prerequisite chains
+4. Progress from foundational to advanced topics
+5. Include practical/project courses
+6. Make course codes realistic (e.g., CS101, ML201)
+7. Provide detailed course descriptions
+
+Return ONLY the JSON object with no additional text, markdown formatting, or code blocks.
 """)
     
     return "\n".join(prompt_parts)

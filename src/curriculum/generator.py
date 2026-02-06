@@ -73,17 +73,28 @@ class CurriculumGenerator:
         print("🤖 Generating curriculum with Gemini...")
         response = self.llm_client.generate_with_retry(
             prompt=prompt,
-            temperature=0.7
+            temperature=0.5  # Lower temperature for more consistent JSON
         )
         
         # Step 4: Parse JSON response
         try:
             # Extract JSON from response (handle markdown code blocks)
             json_str = response.strip()
-            if json_str.startswith("```json"):
+            
+            # Remove markdown code blocks
+            if "```json" in json_str:
                 json_str = json_str.split("```json")[1].split("```")[0].strip()
-            elif json_str.startswith("```"):
-                json_str = json_str.split("```")[1].split("```")[0].strip()
+            elif "```" in json_str:
+                # Find the content between first and last ```
+                parts = json_str.split("```")
+                if len(parts) >= 2:
+                    json_str = parts[1].strip()
+            
+            # Remove any leading/trailing text
+            if "{" in json_str and "}" in json_str:
+                start = json_str.find("{")
+                end = json_str.rfind("}") + 1
+                json_str = json_str[start:end]
             
             curriculum_data = json.loads(json_str)
             curriculum = Curriculum(**curriculum_data)
@@ -92,8 +103,14 @@ class CurriculumGenerator:
             return curriculum
         
         except json.JSONDecodeError as e:
-            raise ValueError(f"Failed to parse curriculum JSON: {str(e)}\nResponse: {response[:500]}")
+            print(f"❌ JSON parsing failed: {str(e)}")
+            print(f"Response preview: {response[:500]}")
+            raise ValueError(
+                f"Failed to parse curriculum JSON. The AI generated invalid JSON format. "
+                f"Error: {str(e)}. Please try again."
+            )
         except Exception as e:
+            print(f"❌ Validation failed: {str(e)}")
             raise ValueError(f"Failed to create curriculum object: {str(e)}")
     
     def generate_from_dict(self, request_dict: dict) -> Curriculum:
