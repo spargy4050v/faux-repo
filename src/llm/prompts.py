@@ -87,13 +87,14 @@ Provide the curriculum in the following JSON format:
 }
 
 Guidelines:
-1. Each semester should have 15-20 credits
-2. Include a mix of Core, Elective, and Lab courses
-3. Ensure proper prerequisite chains
-4. Progress from foundational to advanced topics
-5. Include practical/project courses
-6. Make course codes realistic (e.g., CS101, ML201)
-7. Provide detailed course descriptions
+1. Each course must have between 1-6 credits (typically 3-4 for theory, 1-2 for labs)
+2. Each semester should have 15-20 total credits
+3. Include a mix of Core, Elective, and Lab courses
+4. Ensure proper prerequisite chains
+5. Progress from foundational to advanced topics
+6. Include practical/project courses
+7. Make course codes realistic (e.g., CS101, ML201)
+8. Provide detailed course descriptions
 
 Return ONLY the JSON object, no additional text.
 """)
